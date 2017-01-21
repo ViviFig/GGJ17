@@ -5,23 +5,23 @@ public class Player : MonoBehaviour {
 
 
 	public bool CanMove;
-	public int Gravity =9;
+	
 	public float speed ;
 
 	public int JumpForce =10;
 	public  bool IsTouchingPlane = true;
-//	public bool HandIsBusy;
+
 
 	private Vector3 motion = Vector3.zero;
-	// Use this for initialization
+	
 	void Start () {
-		//CanMove = true;
+		
 		JumpForce = 10;
 		IsTouchingPlane = true;
-		//HandIsBusy = false;
+		
 	}
 	
-	// Update is called once per frame
+	
 	void FixedUpdate () {
 		if (CanMove)
 		PlayerMovement();
@@ -51,16 +51,22 @@ public class Player : MonoBehaviour {
 			GetComponent<Rigidbody> ().AddForce (0, JumpForce, 0, ForceMode.Impulse);
 		}
 
-		if (Input.GetKeyUp (KeyCode.LeftShift) && IsTouchingPlane == true) {
-			IsTouchingPlane = false;
+		//if (Input.GetKeyUp (KeyCode.LeftShift) && IsTouchingPlane == true) {
+		//	IsTouchingPlane = false;
+
+		//}
+
 
 		}
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Plane")
+        {
+            IsTouchingPlane = true;
+        }
+    }
 
-		} 
-		
-	
-
-	}
+}
 	
 
