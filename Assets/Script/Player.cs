@@ -54,6 +54,16 @@ public class Player : MonoBehaviour {
         {
             IsTouchingPlane = true;
         }
+        if (other.tag == "Plane" && other.GetComponent<PlatformLeftRight>() != null) {
+            transform.SetParent(other.transform);
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Plane" && other.GetComponent<PlatformLeftRight>() != null)
+        {
+            transform.SetParent(null);
+        }
     }
 
 }

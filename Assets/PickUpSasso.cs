@@ -36,6 +36,7 @@ public class PickUpSasso : MonoBehaviour {
     {
         nothingInHand = true;
         rock.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+        rock.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
         rock.transform.parent = null;
 
         rock.transform.Rotate(0f, 0f, 45f);
