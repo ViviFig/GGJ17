@@ -4,26 +4,52 @@ using System.Collections;
 public class Player : MonoBehaviour {
 
 
-	public bool CanMove;
 	
-	public float speed ;
+	
+	 float speed =2;
 
 	public int JumpForce =10;
 	public  bool IsTouchingPlane = true;
+    private int heartsCount;
+
+    public int HeartsCount
+    {
+        get { return heartsCount; }
+        set {if (heartsCount != value)
+            {
+
+                switch (heartsCount)
+                {
+                    case 1:
+                        currentPlayerStates = PlayerStates.Walking;
+                        OnChangedPlayerStates();
+                        break;
+                    case 2:
+                        currentPlayerStates = PlayerStates.FinalStage;
+                        OnChangedPlayerStates();
+                        break;
+                    default:
+                        break;
+                }
+            }
+            heartsCount = value;
+        }
+    }
 
 
-	private Vector3 motion = Vector3.zero;
+    private Vector3 motion = Vector3.zero;
 	
 	void Start () {
-		
-		JumpForce = 10;
+
+       currentPlayerStates =  PlayerStates.Crawling;
+        OnChangedPlayerStates();
 		IsTouchingPlane = true;
 		
 	}
 	
 	
 	void FixedUpdate () {
-		if (CanMove)
+		
 		PlayerMovement();
 	
 	}
@@ -57,6 +83,12 @@ public class Player : MonoBehaviour {
         if (other.tag == "Plane" && other.GetComponent<PlatformLeftRight>() != null) {
             transform.SetParent(other.transform);
         }
+        if (other.tag == "Heart")
+        {
+          
+            HeartsCount++;
+            Destroy(other.gameObject);
+        }
     }
     private void OnTriggerExit(Collider other)
     {
@@ -66,6 +98,30 @@ public class Player : MonoBehaviour {
         }
     }
 
+
+    public PlayerStates currentPlayerStates;
+
+
+    public void OnChangedPlayerStates()
+    {
+        switch (currentPlayerStates)
+        {
+            case global::PlayerStates.Crawling:
+                JumpForce = 2;
+                break;
+            case global::PlayerStates.Walking:
+                JumpForce = 10;
+                break;
+            case global::PlayerStates.FinalStage:
+                break;
+        }
+    }
 }
-	
+public enum PlayerStates
+{
+    Crawling,
+    Walking,
+    FinalStage
+}
+
 
