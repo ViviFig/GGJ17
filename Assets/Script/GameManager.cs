@@ -9,15 +9,8 @@ public class GameManager : MonoBehaviour {
     #region Events declaration
     public delegate void GameEvent();
     //eventi base del gioco.
-    public event GameEvent OnGameStart;
-    public event GameEvent OnLevelEnd;
-    public event GameEvent OnPlayLevel;
-    public event GameEvent OnGameWin;
-    // evento che fa partire il gioco/livello
-
-    //eventi per i bonus
-    public event GameEvent OnBonusTaken;
-
+    public event GameEvent OnGameStart, OnCrawling, OnWalking, OnThrowing, OnJumping, OnPushing,
+    OnHudHeartBeat, OnLevelEnd,OnPlayLevel, OnLevelBackGround, OnMainMenu, OnTrapStart,OnImpact, OnBonusTaken;
     #endregion
 
     void Start()
@@ -37,21 +30,21 @@ public class GameManager : MonoBehaviour {
 
 	public PlayerStates currentPlayerStates;
     
-	
-	public void ChangePlayer(){
+
+    public void PlayerStates(){
 		switch (currentPlayerStates) {
-		case PlayerStates.Lev1:
+		case global::PlayerStates.Crawling:
 			break;
-		case PlayerStates.Lev2:
+		case global::PlayerStates.Walking:
 			break;
-        case PlayerStates.Lev3:
+        case global::PlayerStates.FinalStage:
                 break;
         }
 	}
 }
 public enum PlayerStates
 {
-    Lev1,
-    Lev2,
-    Lev3
+    Crawling,
+    Walking,
+    FinalStage
 }

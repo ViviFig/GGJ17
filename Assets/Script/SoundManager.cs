@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour {
 
+    #region AudioClipRegion
     AudioSource audioSource;
     public AudioClip BonusTaken;
     public AudioClip Crawling;
@@ -12,37 +14,99 @@ public class SoundManager : MonoBehaviour {
     public AudioClip Jumping;
     public AudioClip LevelEnd;
     public AudioClip HudHeartBeat;
-    public AudioClip OnPlayLevel;
     public AudioClip LevelBackGround;
     public AudioClip MainMenu;
     public AudioClip Pushing;
-    public AudioClip OnTrap;
-    public Sounds DefaultSound;
-
+    public AudioClip TrapStart;
+    public AudioClip Impact;
+    public AudioClip ScanSouns;
+    public AudioClip Death;
+    #endregion
+    public Sounds DefaultSound; 
+    
     void Awake()
     {
-        GameManager.instance.OnLevelEnd += OnLevelEnd;// Music per la fine del livello
-        GameManager.instance.OnGameWin += HandleOnGameWin;// Musica di fine Livello
-        GameManager.instance.OnPlayLevel += HandleOnPLayLevel;//Enviromen Music
+        #region Iscrizione Eventi
         GameManager.instance.OnBonusTaken += HandleOnBonusTaken;//Musica quando prende i Cuori
+        GameManager.instance.OnCrawling += HandleOnCrawling;//Suono mentre striscia
+        GameManager.instance.OnWalking += HandleOnWalking;//Suono mentre Cammina
+        GameManager.instance.OnThrowing += HandleOnThrowing;//Suono quando lancia un oggetto
+        GameManager.instance.OnJumping += HandleOnJumping;//Suono mentre Salta
+        GameManager.instance.OnLevelEnd += HandleOnLevelEnd;//Musica di fine gioco
+        GameManager.instance.OnHudHeartBeat += HandleOnHudHeartBeat;//Suono del 
+        GameManager.instance.OnLevelBackGround += HandleLevelBackGround;//Suono mentre Cammina
+        GameManager.instance.OnMainMenu += HandleMainMenu;//Suono quando lancia un oggetto
+        GameManager.instance.OnPushing += HandlePushing;//Suono mentre Salta
+        GameManager.instance.OnTrapStart += HandleOnTrapStart;//Suono del battitoCardiaco
+        GameManager.instance.OnImpact += HandleOnImpact;// Suono dell'impatto 
+        #endregion
+
+
     }
 
-    void HandleOnPLayLevel() {
-    }
-    void HandleOnBonusTaken()
+    #region HandleRegion
+    void HandleOnCrawling()
     {
-        PlaySound(Sounds.LevelBackGround);
+        PlaySound(Sounds.Crawling);
     }
 
-    void HandleOnGameWin()
+    void HandleOnWalking()
+    {
+        PlaySound(Sounds.Walking);
+    }
+
+    void HandleOnThrowing()
+    {
+        PlaySound(Sounds.Throwing);
+    }
+
+    void HandleOnJumping()
+    {
+        PlaySound(Sounds.Jumping);
+    }
+
+    void HandleOnLevelEnd()
     {
         PlaySound(Sounds.LevelEnd);
     }
 
-    void OnLevelEnd()
+    void HandleOnHudHeartBeat()
     {
-        PlaySound(Sounds.Jumping);
+        PlaySound(Sounds.HudHeartBeat);
     }
+
+    void HandleLevelBackGround()
+    {
+        PlaySound(Sounds.LevelBackGround);
+    }
+
+    void HandleMainMenu()
+    {
+        PlaySound(Sounds.MainMenu);
+    }
+
+    void HandlePushing()
+    {
+        PlaySound(Sounds.Pushing);
+    }
+
+    void HandleOnTrapStart()
+    {
+        PlaySound(Sounds.TrapStart);
+    }
+
+    void HandleOnImpact()
+    {
+        PlaySound(Sounds.Impact);
+    }
+
+    void HandleOnBonusTaken()
+    {
+        PlaySound(Sounds.BonusTaken);
+    } 
+    #endregion
+
+
 
 
     // Use this for initialization
@@ -55,12 +119,6 @@ public class SoundManager : MonoBehaviour {
         }
 
         PlaySound(DefaultSound);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     public void PlaySound(Sounds _soundToPlay)
@@ -97,8 +155,14 @@ public class SoundManager : MonoBehaviour {
             case Sounds.Pushing:
                 audioSource.clip = Pushing;
                 break;
-            case Sounds.OnTrap:
-                audioSource.clip = OnTrap;
+            case Sounds.TrapStart:
+                audioSource.clip = TrapStart;
+                break;
+            case Sounds.Impact:
+                audioSource.clip = Impact;
+                break;
+            case Sounds.Death:
+                audioSource.clip = Death;
                 break;
         }
 
@@ -107,7 +171,7 @@ public class SoundManager : MonoBehaviour {
 }
     public enum Sounds
     {
-        Crawling,//  
+        Crawling,
         Walking,
         Throwing,
         Jumping,
@@ -117,7 +181,9 @@ public class SoundManager : MonoBehaviour {
         LevelBackGround,
         MainMenu,
         Pushing,
-        OnTrap
-    }
+        TrapStart,
+        Impact,
+        Death
+}
 
 
