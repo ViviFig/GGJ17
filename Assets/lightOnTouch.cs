@@ -19,7 +19,7 @@ public class lightOnTouch : MonoBehaviour {
         Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
         Vector3 pos = contact.point;
         GameObject tempLight = Instantiate(light, pos, rot);
-        light = tempLight;
+        
         Destroy(tempLight, 4);
     }
 }

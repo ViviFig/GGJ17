@@ -47,6 +47,6 @@ public class PickUpSasso : MonoBehaviour {
         sasso.transform.SetParent(gameObject.transform);
         sasso.transform.SetAsFirstSibling();
         sasso.transform.position = pickUpSassoTransform.position;
-        sasso.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY;// this fixes the bug of the rock going through the groud after a while
+        //sasso.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY;
     }
 }
