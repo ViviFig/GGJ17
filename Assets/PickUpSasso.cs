@@ -47,6 +47,6 @@ public class PickUpSasso : MonoBehaviour {
         sasso.transform.SetParent(gameObject.transform);
         sasso.transform.SetAsFirstSibling();
         sasso.transform.position = pickUpSassoTransform.position;
-        //sasso.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY;
+        sasso.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY;
     }
 }
