@@ -4,31 +4,22 @@ using System.Collections;
 public class GameManager : MonoBehaviour {
 
 	public enum PlayerStates{
-		 Nonno,
-		 Bambino}
+		 Lev1,
+         Lev2,
+         Lev3
+		 }
 		;
 	public PlayerStates currentPlayerStates;
-
-	//public bool IsNonno;
-	//public bool IsNipote;
-
-
-	// Use this for initialization
-	void Start () {
+    
 	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
 	public void ChangePlayer(){
 		switch (currentPlayerStates) {
-		case PlayerStates.Nonno:
+		case PlayerStates.Lev1:
 			break;
-		case PlayerStates.Bambino:
+		case PlayerStates.Lev2:
 			break;
-	}
+        case PlayerStates.Lev3:
+                break;
+        }
 	}
 }

@@ -30,19 +30,13 @@ public class Player : MonoBehaviour {
 
 	public void PlayerMovement(){
 
-			//float speed = 4.0f;
+			
 			
 			float translationX = Input.GetAxisRaw("Horizontal") * speed;
 			
 			float pos = transform.position.x;
 			translationX *= Time.deltaTime;
 			transform.Translate(translationX, 0, 0);
-
-		if(transform.position.x >=12)
-			transform.position = new Vector3 (12, transform.position.y, transform.position.z);
-
-		if(transform.position.x <=-12)
-			transform.position = new Vector3 (-12, transform.position.y, transform.position.z);
 		
 
 			
@@ -50,11 +44,6 @@ public class Player : MonoBehaviour {
 			IsTouchingPlane = false;
 			GetComponent<Rigidbody> ().AddForce (0, JumpForce, 0, ForceMode.Impulse);
 		}
-
-		//if (Input.GetKeyUp (KeyCode.LeftShift) && IsTouchingPlane == true) {
-		//	IsTouchingPlane = false;
-
-		//}
 
 
 		}
