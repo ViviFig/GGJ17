@@ -19,7 +19,7 @@ public class lightOnTouch : MonoBehaviour {
         Vector3 pos = contact.point;
         GameObject tempLight = Instantiate(light, pos, rot);
         
-        Destroy(tempLight, 2);
+        Destroy(tempLight, 0.1f);
             
         }
     }
