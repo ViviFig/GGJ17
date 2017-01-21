@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Cuoricino : MonoBehaviour {
+public class Heart : MonoBehaviour {
 
     private bool floating;
     private float t;
@@ -14,13 +14,13 @@ public class Cuoricino : MonoBehaviour {
 	void Update () {
         transform.Rotate(0f, 80f * Time.deltaTime, 0f);
 
-        if (floating)
-        {
-            floatingUp();
-        }else
-        {
-            floatingDown();
-        }
+        //if (floating)
+        //{
+        //    floatingUp();
+        //}else
+        //{
+        //    floatingDown();
+        //}
 	}
 
     private void floatingUp()
