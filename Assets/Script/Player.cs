@@ -4,18 +4,19 @@ using System.Collections;
 public class Player : MonoBehaviour {
 
 
-	
-	
-	 float speed =2;
+    Animator animator;
+    //public MeshFilter[] MeshesLetter;
 
-	public int JumpForce =10;
-	public  bool IsTouchingPlane = true;
+    public float speed = 10;
+
+    public int JumpForce = 10;
+    public bool IsTouchingPlane = true;
     private int heartsCount;
 
     public int HeartsCount
     {
         get { return heartsCount; }
-        set {if (heartsCount != value)
+        set { if (heartsCount != value)
             {
 
                 switch (heartsCount)
@@ -38,41 +39,48 @@ public class Player : MonoBehaviour {
 
 
     private Vector3 motion = Vector3.zero;
-	
-	void Start () {
 
-       currentPlayerStates =  PlayerStates.Crawling;
+    void Start() {
+        animator = GetComponentInChildren<Animator>();
+        currentPlayerStates = PlayerStates.Crawling;
         OnChangedPlayerStates();
-		IsTouchingPlane = true;
-		
-	}
-	
-	
-	void FixedUpdate () {
-		
-		PlayerMovement();
-	
-	}
+        IsTouchingPlane = true;
 
-	public void PlayerMovement(){
-
-			
-			
-			float translationX = Input.GetAxisRaw("Horizontal") * speed;
-			
-			float pos = transform.position.x;
-			translationX *= Time.deltaTime;
-			transform.Translate(translationX, 0, 0);
-		
-
-			
-		if (Input.GetKeyUp (KeyCode.Space) && IsTouchingPlane == true) {
-			IsTouchingPlane = false;
-			GetComponent<Rigidbody> ().AddForce (0, JumpForce, 0, ForceMode.Impulse);
-		}
+    }
 
 
-		}
+    void FixedUpdate() {
+
+        PlayerMovement();
+
+    }
+
+    public void PlayerMovement() {
+
+
+
+        float translationZ = Input.GetAxisRaw("Horizontal") * speed;
+
+        float pos = transform.position.z;
+        translationZ *= Time.deltaTime;
+        transform.Translate(0, 0, translationZ);
+        //if (Input.GetKeyDown (KeyCode.D)) {
+        //    transform.Translate(Vector3.forward * Time.deltaTime);
+        //}
+
+
+        if (Input.GetKeyUp(KeyCode.Space) && IsTouchingPlane == true) {
+            animator.SetTrigger("Jumping");
+            IsTouchingPlane = false;
+            GetComponent<Rigidbody>().AddForce(0, JumpForce, 0, ForceMode.Impulse);
+        }
+
+
+    }
+
+    public void JumpTime() {
+        
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -80,10 +88,10 @@ public class Player : MonoBehaviour {
         {
             IsTouchingPlane = true;
         }
-        if (other.tag == "Plane" && other.GetComponent<PlatformLeftRight>() != null) {
+        if (other.GetComponent<PlatformLeftRight>() != null) {
             transform.SetParent(other.transform);
         }
-        if (other.tag == "Heart")
+        if (other.GetComponent<Heart>() !=null)
         {
           
             HeartsCount++;

@@ -14,13 +14,6 @@ public class Heart : MonoBehaviour {
 	void Update () {
         transform.Rotate(0f, 80f * Time.deltaTime, 0f);
 
-        //if (floating)
-        //{
-        //    floatingUp();
-        //}else
-        //{
-        //    floatingDown();
-        //}
 	}
 
     private void floatingUp()
